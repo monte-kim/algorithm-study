@@ -11,5 +11,6 @@ function factorial(n) {
   for (let i = n; i > 1; i--) {
     f *= BigInt(i);
   }
+
   return f;
 }

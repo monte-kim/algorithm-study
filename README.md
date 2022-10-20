@@ -17,3 +17,11 @@ function lcm(a,b){
   return a * b / gcd(a,b);
 }
 ```
+
+#### - Factorial(Recursion)
+
+```
+function factorial(n) {
+	return n > 1? n * factorial(n - 1) : 1;
+}
+```
