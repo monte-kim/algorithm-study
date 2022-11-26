@@ -13,5 +13,5 @@ function solution(my_string) {
     if (operator === '-') answer -= numbers[index + 1];
   });
   return answer;
-  //   return eval(my_string);
+  // eval을 사용한 답안들이 많았지만 eval is evil, 절대 지양하자.
 }
