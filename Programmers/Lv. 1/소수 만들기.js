@@ -1,3 +1,4 @@
+// 소수 찾기
 function getPrime(n) {
   const prime = Array(n + 1)
     .fill(true)
@@ -12,6 +13,7 @@ function getPrime(n) {
   return prime;
 }
 
+// 조합 찾기
 function getCombinations(array, selectNumber) {
   const results = [];
   if (selectNumber === 1) {
