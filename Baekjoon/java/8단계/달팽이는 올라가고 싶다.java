@@ -7,20 +7,15 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        StringBuilder sb = new StringBuilder();
         int a = Integer.parseInt(st.nextToken());
         int b = Integer.parseInt(st.nextToken());
         int v = Integer.parseInt(st.nextToken());
-        int sum = 0;
-        int days = 0;
+        
+        double days = (double)(v - a) / (a - b);
 
-        while (sum < v) {
-            days++;
-            sum += a;
-            if(sum >= v) break;
-            sum -= b;
-        }
-
-        bw.write(days + "\n");
+        sb.append((int)(Math.ceil(days) + 1));
+        bw.write(sb.toString());
         bw.flush();
     }
 }
