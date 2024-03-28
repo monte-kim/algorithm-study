@@ -9,23 +9,23 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
-        List<String> tests = new ArrayList<>();
-        Map<Integer, String> pokemons1 = new HashMap<>();
-        Map<String, Integer> pokemons2 = new HashMap<>();
+        Map<String, Integer> pokemons = new HashMap<>();
+        String[] pokemonNameIndex = new String[N];
+
 
         for (int i = 1; i <= N; i++) {
             String name = br.readLine();
-            pokemons1.put(i, name);
-            pokemons2.put(name, i);
+            pokemons.put(name, i);
+            pokemonNameIndex[i - 1] = name;
         }
 
         for (int i = 0; i < M; i++) {
             String test = br.readLine();
-            if(pokemons2.containsKey(test)){
-                sb.append(pokemons2.get(test));
-            }else{
+            if (pokemons.containsKey(test)) {
+                sb.append(pokemons.get(test));
+            } else {
                 int index = Integer.parseInt(test);
-                sb.append(pokemons1.get(index));
+                sb.append(pokemonNameIndex[index - 1]);
             }
             sb.append("\n");
         }
