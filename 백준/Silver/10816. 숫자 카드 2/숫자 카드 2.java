@@ -4,7 +4,6 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
         StringTokenizer st;
         int[] myCard = new int[20000001];
@@ -22,10 +21,6 @@ public class Main {
             sb.append(myCard[card + 10000000]).append(" ");
         }
 
-        bw.write(sb.toString());
-        bw.flush();
-
-        br.close();
-        bw.close();
+        System.out.print(sb.toString());
     }
 }
