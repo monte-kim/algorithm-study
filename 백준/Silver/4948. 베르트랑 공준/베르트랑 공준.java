@@ -3,6 +3,7 @@ import java.util.*;
 
 public class Main {
     static boolean[] prime = new boolean[123456 * 2 + 1];
+    static int[] primeCounts = new int[123456 * 2 + 1];
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -10,15 +11,10 @@ public class Main {
         int N;
 
         setPrime();
+        setPrimeCounts();
 
         while ((N = Integer.parseInt(br.readLine())) != 0) {
-            int count = 0;
-            for (int i = N + 1; i <= N * 2; i++) {
-                if (prime[i]) {
-                    count++;
-                }
-            }
-            sb.append(count).append("\n");
+            sb.append((primeCounts[N * 2] - primeCounts[N])).append("\n");
         }
 
         System.out.println(sb);
@@ -34,6 +30,16 @@ public class Main {
                     prime[j] = false;
                 }
             }
+        }
+    }
+
+    public static void setPrimeCounts(){
+        int count = 0;
+        for (int i = 0; i <= 123456 * 2; i++) {
+            if (prime[i]) {
+                count++;
+            }
+            primeCounts[i] = count;
         }
     }
 }
