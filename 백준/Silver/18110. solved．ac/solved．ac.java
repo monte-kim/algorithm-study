@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -13,18 +14,18 @@ public class Main {
 
 		int n = Integer.parseInt(br.readLine());
 		int removedCommentsCount = (int)Math.round(n * 0.15);
-		List<Integer> comments = new ArrayList<>();
+		int[] comments = new int[n];
 
 		for (int i = 0; i < n; i++) {
-			comments.add(Integer.parseInt(br.readLine()));
+			comments[i] = Integer.parseInt(br.readLine());
 		}
-		comments.sort(null);
+		Arrays.sort(comments);
 
 		int sum = 0;
-		for (int i = removedCommentsCount; i < comments.size() - removedCommentsCount; i++) {
-			sum += comments.get(i);
+		for (int i = removedCommentsCount; i < comments.length - removedCommentsCount; i++) {
+			sum += comments[i];
 		}
-		int avg = Math.round((float)sum / (comments.size() - 2 * removedCommentsCount));
+		int avg = Math.round((float)sum / (comments.length - 2 * removedCommentsCount));
 
 		bw.write(String.valueOf(avg));
 		bw.flush();
