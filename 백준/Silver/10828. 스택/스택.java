@@ -20,32 +20,42 @@ public class Main {
 		for (int i = 0; i < N; i++) {
 			st = new StringTokenizer(br.readLine(), " ");
 			String command = st.nextToken();
-			if (command.contains("push")) {
-				stack.add(Integer.parseInt(st.nextToken()));
-				continue;
-			} else if (command.contains("pop")) {
-				if (stack.isEmpty()) {
-					sb.append(-1);
-				} else {
-					sb.append(stack.get(stack.size() - 1));
-					stack.remove(stack.size() -1);
-				}
-			} else if (command.contains("size")) {
-				sb.append(stack.size());
-			} else if (command.contains("empty")) {
-				if (stack.isEmpty()) {
-					sb.append(1);
-				} else {
-					sb.append(0);
-				}
-			} else if (command.contains("top")) {
-				if (stack.isEmpty()) {
-					sb.append(-1);
-				} else {
-					sb.append(stack.get(stack.size() - 1));
-				}
+
+			switch (command) {
+				case "push":
+					stack.add(Integer.parseInt(st.nextToken()));
+					break;
+				case "pop":
+					if (stack.isEmpty()) {
+						sb.append(-1);
+					} else {
+						sb.append(stack.get(stack.size() - 1));
+						stack.remove(stack.size() - 1);
+					}
+					sb.append("\n");
+					break;
+				case "size":
+					sb.append(stack.size()).append("\n");
+					break;
+				case "empty":
+					if (stack.isEmpty()) {
+						sb.append(1);
+					} else {
+						sb.append(0);
+					}
+					sb.append("\n");
+					break;
+				case "top":
+					if (stack.isEmpty()) {
+						sb.append(-1);
+					} else {
+						sb.append(stack.get(stack.size() - 1));
+					}
+					sb.append("\n");
+					break;
+				default:
+					break;
 			}
-			sb.append("\n");
 		}
 
 		bw.write(sb.toString());
