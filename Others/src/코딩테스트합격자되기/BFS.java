@@ -1,9 +1,11 @@
+package 코딩테스트합격자되기;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 // [그래프 - 문제 35] 너비 우선 탐색 순회
-public class Graph35 {
+public class BFS {
 
     private static ArrayList<Integer>[] adjacencyList;
     private static boolean[] visited;
@@ -16,19 +18,16 @@ public class Graph35 {
         System.out.println(Arrays.toString(solution(graph2, 1, 5)));
     }
 
-    private static int[] solution(int[][] graph, int start, int n) {
-        adjacencyList = new ArrayList[n + 1];
-        visited = new boolean[n + 1];
+    private static int[] solution(int[][] graph, int start, int nodes) {
+        adjacencyList = new ArrayList[nodes + 1];
+        visited = new boolean[nodes + 1];
         answer = new ArrayList<>();
 
-        for (int i = 0; i < adjacencyList.length; i++) {
+        for (int i = 0; i <= nodes; i++) {
             adjacencyList[i] = new ArrayList<>();
         }
-
-        for (int[] edges : graph) {
-            int startNode = edges[0];
-            int endNode = edges[1];
-            adjacencyList[startNode].add(endNode);
+        for (int[] edge : graph) {
+            adjacencyList[edge[0]].add(edge[1]);
         }
 
         bfs(start);
@@ -38,16 +37,17 @@ public class Graph35 {
 
     private static void bfs(int start) {
         ArrayDeque<Integer> queue = new ArrayDeque<>();
-        queue.add(start);
         visited[start] = true;
+        queue.add(start);
 
         while (!queue.isEmpty()) {
             int currentNode = queue.poll();
             answer.add(currentNode);
+
             for (int nextNode : adjacencyList[currentNode]) {
                 if (!visited[nextNode]) {
-                    queue.add(nextNode);
                     visited[nextNode] = true;
+                    queue.add(nextNode);
                 }
             }
         }

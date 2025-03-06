@@ -1,8 +1,11 @@
+package 코딩테스트합격자되기;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Stack;
 
-public class Graph34 {
+// [그래프 - 문제 34] 깊이 우선 탐색 순회
+public class DFS {
 
     private static ArrayList<Integer>[] adjacencyList;
     private static boolean[] visited;
@@ -46,16 +49,16 @@ public class Graph34 {
 
     private static void dfs_stack(int start) {
         Stack<Integer> stack = new Stack<>();
-
+        visited[start] = true;
         stack.push(start);
 
         while (!stack.isEmpty()) {
             int currentNode = stack.pop();
-            visited[currentNode] = true;
             answer.add(currentNode);
 
             for (int nextNode : adjacencyList[currentNode]) {
                 if (!visited[nextNode]) {
+                    visited[nextNode] = true;
                     stack.push(nextNode);
                 }
             }
