@@ -1,9 +1,12 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Stack;
 
-// [그래프 - 문제 34] 깊이 우선 탐색 순회
 public class Graph34 {
+
+    private static ArrayList<Integer>[] adjacencyList;
+    private static boolean[] visited;
+    private static ArrayList<Integer> answer;
 
     public static void main(String[] args) {
         int[][] graph1 = {{1, 2}, {2, 3}, {3, 4}, {4, 5}};
@@ -12,36 +15,49 @@ public class Graph34 {
         System.out.println(Arrays.toString(solution(graph2, 1, 6)));
     }
 
-    private static int[] solution(int[][] graph, int start, int n) {
-        ArrayList<Integer>[] adjacencyList;
-        boolean[] visited;
-        ArrayList<Integer> answer;
-
-        adjacencyList = new ArrayList[n + 1];
-        for (int i = 1; i < adjacencyList.length; i++) {
-            adjacencyList[i] = new ArrayList<>();
-        }
-
-        for (int[] edge : graph) {
-            int startNode = edge[0];
-            int endNode = edge[1];
-            adjacencyList[startNode].add(endNode);
-        }
-
-        visited = new boolean[n + 1];
+    private static int[] solution(int[][] graph, int start, int nodes) {
+        adjacencyList = new ArrayList[nodes + 1];
+        visited = new boolean[nodes + 1];
         answer = new ArrayList<>();
 
-        dfs(start, adjacencyList, visited, answer);
+        for (int i = 0; i <= nodes; i++) {
+            adjacencyList[i] = new ArrayList<>();
+        }
+        for (int[] edge : graph) {
+            adjacencyList[edge[0]].add(edge[1]);
+        }
+
+//        dfs_recursive(start);
+        dfs_stack(start);
 
         return answer.stream().mapToInt(Integer::intValue).toArray();
     }
 
-    private static void dfs(int currentNode, List<Integer>[] adjacencyList, boolean[] visited, List<Integer> answer) {
-        visited[currentNode] = true;
-        answer.add(currentNode);
-        for(int nextNode : adjacencyList[currentNode]){
-            if(!visited[nextNode]){
-                dfs(nextNode, adjacencyList, visited, answer);
+    private static void dfs_recursive(int start) {
+        visited[start] = true;
+        answer.add(start);
+
+        for (int nextNode : adjacencyList[start]) {
+            if (!visited[nextNode]) {
+                dfs_recursive(nextNode);
+            }
+        }
+    }
+
+    private static void dfs_stack(int start) {
+        Stack<Integer> stack = new Stack<>();
+
+        stack.push(start);
+
+        while (!stack.isEmpty()) {
+            int currentNode = stack.pop();
+            visited[currentNode] = true;
+            answer.add(currentNode);
+
+            for (int nextNode : adjacencyList[currentNode]) {
+                if (!visited[nextNode]) {
+                    stack.push(nextNode);
+                }
             }
         }
     }
